@@ -9,7 +9,7 @@ const dgram = require('dgram');
 const udp4 = dgram.createSocket('udp4');
 
 const PORT = process.env.PORT || 8080;
-const UPD_PORT = 35553;
+const UPD_PORT = 4444; // 35553
 const HOST = '0.0.0.0';
 const app = express();
 const server = app.listen(PORT, ()=>console.log('Server running on port: ' + PORT));
@@ -25,6 +25,9 @@ udp4.on('listening', ()=>{
 });
 
 udp4.on('message', msg => {
+    //let title = msg.toString('ascii', 4, 8);
+    // let title = msg.slice(8, 10);
+    // console.log(title)
     fh_data = {
         IsRaceOn: msg.readInt32LE(fh4.IsRaceOn), // 1 when race is on, 0 when in menus
 
